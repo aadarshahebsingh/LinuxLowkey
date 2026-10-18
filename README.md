@@ -1,4 +1,4 @@
-# Linux Bash Automation Scripts
+# LinuxLowkey
 
 ![Linux](https://img.shields.io/badge/Linux-Ubuntu%2024.04-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 ![Bash](https://img.shields.io/badge/Shell-Bash-121011?style=for-the-badge&logo=gnubash&logoColor=white)
@@ -414,13 +414,9 @@ Planned improvements include:
 
 # Author
 
-Tanay Jain
+Aadarsh Shaheb Singh
 
 Built as part of a long-term Cloud & DevOps Engineering learning roadmap.
 
 ---
 
-# License
-
-This project is licensed under the MIT License.
-```
