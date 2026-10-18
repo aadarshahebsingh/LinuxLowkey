@@ -408,7 +408,7 @@ Planned improvements include:
 - monitoring dashboards
 - AWS S3 backup integration
 - Docker container monitoring
-- Terraform deployment integration
+- Terraform deployment integrations
 
 ---
 
