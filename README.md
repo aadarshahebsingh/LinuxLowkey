@@ -2,38 +2,25 @@
 
 ![Linux](https://img.shields.io/badge/Linux-Ubuntu%2024.04-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 ![Bash](https://img.shields.io/badge/Shell-Bash-121011?style=for-the-badge&logo=gnubash&logoColor=white)
-![AWS](https://img.shields.io/badge/Cloud-AWS%20EC2-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
 ![Automation](https://img.shields.io/badge/Focus-Automation-blue?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
 
-Production-style Linux automation scripts built and tested on AWS EC2 using Bash.
+Bash scripts that automate common Linux administration tasks: server health checks, disk alerts, backups, log cleanup, user creation and log analysis.
 
-This repository contains real-world Linux administration and DevOps automation scripts focused on:
-
-- server monitoring
-- disk usage management
-- automated backups
-- log cleanup
-- user provisioning
-- log analysis
-- cron automation
-
-All scripts were developed during hands-on Linux + AWS practice on Ubuntu servers.
+All scripts were written and tested on Ubuntu 24.04 LTS.
 
 ---
 
 # Project Goals
 
-The goal of this project was to simulate practical system administration and DevOps tasks commonly handled in real production environments.
+The goal of this project is to practice everyday system administration tasks and automate them with Bash.
 
-Instead of writing isolated beginner scripts, this project focuses on:
+The scripts focus on:
 
 - reusable automation
 - logging and reporting
-- error handling
+- basic error handling
 - monitoring workflows
-- scheduled execution
-- operational maintenance
+- scheduled execution with cron
 
 ---
 
@@ -41,28 +28,24 @@ Instead of writing isolated beginner scripts, this project focuses on:
 
 | Script | Purpose | Key Features |
 |---|---|---|
-| `server_health.sh` | Complete server monitoring | CPU, RAM, Disk, Services, Network |
+| `server_health.sh` | Server health check | CPU, RAM, Disk, Services, Network |
 | `disk_alerter.sh` | Disk usage monitoring | Threshold alerts, logs, reports |
-| `log_cleaner.sh` | Log maintenance automation | Compression, deletion, cleanup reports |
-| `user_creation.sh` | User provisioning automation | Validation, groups, sudo setup |
-| `backup.sh` | Automated backup system | Compression, verification, retention |
-| `find_large_files.sh` | Disk investigation tool | Detects storage-heavy files |
-| `log_analyzer.sh` | Log analysis utility | grep + awk + sed powered summaries |
+| `log_cleaner.sh` | Log maintenance | Compression, deletion, cleanup reports |
+| `user_creation.sh` | User creation | Validation, groups, sudo setup |
+| `backup.sh` | Backup | Compression, verification, retention |
+| `find_large_files.sh` | Disk investigation | Finds large files |
+| `log_analyzer.sh` | Log analysis | grep + awk + sed summaries |
 
 ---
 
 # Technologies Used
 
 - Linux (Ubuntu 24.04 LTS)
-- Bash Scripting
-- AWS EC2
-- Cron Jobs
-- grep
-- awk
-- sed
-- tar
-- gzip
-- SSH / SCP / rsync
+- Bash scripting
+- Cron
+- grep, awk, sed
+- tar, gzip
+- rsync
 
 ---
 
@@ -71,17 +54,15 @@ Instead of writing isolated beginner scripts, this project focuses on:
 | Component | Details |
 |---|---|
 | OS | Ubuntu 24.04 LTS |
-| Cloud Platform | AWS EC2 |
-| Instance Type | t2.micro |
+| Where tested | [your setup: local VM / WSL / dual boot] |
 | Shell | Bash |
-| Architecture | Linux CLI based automation |
 
 ---
 
 # Project Structure
 
 ```text
-linux-bash-scripts/
+LinuxLowkey/
 │
 ├── backup.sh
 ├── disk_alerter.sh
@@ -98,7 +79,7 @@ linux-bash-scripts/
 
 ---
 
-# Sample Production Workflow
+# Workflow
 
 ```text
 Cron Job
@@ -109,7 +90,7 @@ Logs Generated
    ↓
 Alerts Triggered
    ↓
-Cleanup / Backup Automation
+Cleanup / Backup
 ```
 
 ---
@@ -117,29 +98,29 @@ Cleanup / Backup Automation
 # Features
 
 ## Monitoring
-- CPU monitoring
-- RAM monitoring
-- Disk usage monitoring
+- CPU usage
+- RAM usage
+- Disk usage
 - Service status checks
-- Network connectivity checks
+- Internet connectivity check
 
 ## Automation
-- Scheduled cron execution
-- Automated cleanup
+- Scheduled runs with cron
+- Automated log cleanup
 - Automated backups
-- Automated alert generation
+- Threshold-based alerts
 
 ## System Administration
-- User provisioning
+- User creation
 - Group management
 - Permission handling
-- Backup retention policies
+- Backup retention
 
 ## Log Processing
 - Error detection
 - Warning extraction
 - Pattern filtering
-- Statistical summaries
+- Summary counts
 
 ---
 
@@ -148,14 +129,12 @@ Cleanup / Backup Automation
 ## Clone Repository
 
 ```bash
-git clone https://github.com/tanayjdev/linux-bash-scripts.git
+git clone https://github.com/aadarshahebsingh/LinuxLowkey.git
 
-cd linux-bash-scripts
+cd LinuxLowkey
 ```
 
----
-
-# Make Scripts Executable
+## Make Scripts Executable
 
 ```bash
 chmod +x *.sh
@@ -169,16 +148,11 @@ chmod +x *.sh
 ./server_health.sh
 ```
 
-### Monitors
-- CPU usage
-- RAM usage
-- Disk usage
-- Running services
-- Internet connectivity
+Checks CPU, RAM and disk usage, the status of selected services, and internet connectivity.
 
 ### Example Output
 
-```bash
+```text
 ================================================
  SERVER HEALTH CHECK REPORT
 ================================================
@@ -187,9 +161,8 @@ CPU Usage: 12%
 RAM Usage: 43%
 Disk Usage: 38%
 
-ssh: RUNNING
-docker: RUNNING
-nginx: RUNNING
+cron: RUNNING
+rsyslog: RUNNING
 
 Internet: CONNECTED
 ```
@@ -202,15 +175,13 @@ Internet: CONNECTED
 ./disk_alerter.sh
 ```
 
-### Features
-- monitors all partitions
-- threshold-based alerts
-- log file generation
-- alert reporting
+- checks all mounted partitions
+- raises an alert when usage crosses a threshold
+- writes results to a log file
 
 ### Example
 
-```bash
+```text
 ALERT: / is at 85%
 ```
 
@@ -222,11 +193,9 @@ ALERT: / is at 85%
 ./log_cleaner.sh
 ```
 
-### Features
 - deletes old logs
 - compresses recent logs
-- cleanup reporting
-- storage optimization
+- prints a cleanup report
 
 ---
 
@@ -250,9 +219,8 @@ sudo ./user_creation.sh --file users.csv
 username, full_name, group, sudo
 ```
 
-### Features
 - username validation
-- automatic home creation
+- home directory creation
 - sudo assignment
 - group management
 - welcome file creation
@@ -265,16 +233,15 @@ username, full_name, group, sudo
 ./backup.sh
 ```
 
-### Features
 - compressed backups
 - integrity verification
 - retention cleanup
-- multiple source support
-- automatic logging
+- multiple source folders
+- logging
 
 ### Example
 
-```bash
+```text
 Backup created successfully
 Verification passed
 ```
@@ -283,15 +250,11 @@ Verification passed
 
 # 6. Find Large Files
 
-## Find files larger than 100MB
-
 ```bash
+# files larger than 100MB
 ./find_large_files.sh /home 100M
-```
 
-## Find files larger than 1GB
-
-```bash
+# files larger than 1GB
 ./find_large_files.sh / 1G
 ```
 
@@ -303,7 +266,7 @@ Verification passed
 ./log_analyzer.sh /path/to/logfile.log
 ```
 
-### Generates
+Generates:
 - error counts
 - warning counts
 - hourly distribution
@@ -313,20 +276,20 @@ Verification passed
 
 # Cron Automation
 
-The following cron jobs were configured during testing:
+Example cron jobs (replace `<user>` and the paths with your own):
 
 ```cron
 # Health check every 15 minutes
-*/15 * * * * /home/ubuntu/scripts/server_health.sh >> /home/ubuntu/logs/health.log 2>&1
+*/15 * * * * /home/<user>/LinuxLowkey/server_health.sh >> /home/<user>/LinuxLowkey/logs/health.log 2>&1
 
 # Disk alerts every hour
-0 * * * * /home/ubuntu/scripts/disk_alerter.sh >> /home/ubuntu/logs/disk.log 2>&1
+0 * * * * /home/<user>/LinuxLowkey/disk_alerter.sh >> /home/<user>/LinuxLowkey/logs/disk.log 2>&1
 
 # Daily backups at 2 AM
-0 2 * * * /home/ubuntu/scripts/backup.sh >> /home/ubuntu/logs/backup.log 2>&1
+0 2 * * * /home/<user>/LinuxLowkey/backup.sh >> /home/<user>/LinuxLowkey/logs/backup.log 2>&1
 
-# Weekly log cleanup
-0 23 * * 0 /home/ubuntu/scripts/log_cleaner.sh >> /home/ubuntu/logs/cleaner.log 2>&1
+# Weekly log cleanup (Sunday 11 PM)
+0 23 * * 0 /home/<user>/LinuxLowkey/log_cleaner.sh >> /home/<user>/LinuxLowkey/logs/cleaner.log 2>&1
 ```
 
 ---
@@ -334,81 +297,48 @@ The following cron jobs were configured during testing:
 # Concepts Demonstrated
 
 ## Linux Administration
-- process management
+- process and service checks
 - user management
 - file permissions
-- disk operations
-- package management
+- disk usage
 
 ## Bash Scripting
 - variables
 - loops
 - functions
-- arrays
 - conditionals
-- return codes
+- exit codes
 
 ## Automation
 - cron scheduling
-- monitoring workflows
-- cleanup automation
-- backup automation
+- cleanup and backup automation
+- logging
 
 ## Log Analysis
 - grep
 - awk
 - sed
 - pipelines
-- filtering and parsing
-
-## Cloud & Networking
-- AWS EC2
-- SSH
-- SCP
-- rsync
-- connectivity troubleshooting
 
 ---
 
 # What I Learned
 
-Through this project I learned:
-
-- how to automate repetitive Linux administration tasks
-- how monitoring systems are structured
-- how cron jobs are used in production
-- how backup retention policies work
-- how log analysis is performed using CLI tools
-- how to write modular and reusable bash scripts
+- how to automate repetitive Linux tasks with Bash
+- how cron schedules jobs
+- how backup retention works
+- how to analyze logs with grep, awk and sed
+- how to write reusable scripts with functions
 - how to manage Linux users and permissions
-- how to troubleshoot SSH and server connectivity issues
-
----
-
-# Real-World Relevance
-
-These scripts simulate operational tasks commonly performed by:
-
-- DevOps Engineers
-- Linux System Administrators
-- Site Reliability Engineers (SREs)
-- Cloud Engineers
-
-The project focuses on practical automation rather than theoretical examples.
 
 ---
 
 # Future Improvements
 
-Planned improvements include:
-
 - email alerts
 - Slack/Discord notifications
-- centralized logging
-- monitoring dashboards
-- AWS S3 backup integration
-- Docker container monitoring
-- Terraform deployment integrations
+- Dockerfile to run the scripts in a container
+- GitHub Actions workflow with ShellCheck
 
 ---
 
@@ -416,7 +346,4 @@ Planned improvements include:
 
 Aadarsh Shaheb Singh
 
-Built as part of a long-term Cloud & DevOps Engineering learning roadmap.
-
----
-
+Built as part of my Linux and automation learning.
